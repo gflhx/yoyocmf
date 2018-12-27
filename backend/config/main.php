@@ -25,10 +25,6 @@ return [
             ],
             /* 重定义end */
         ],
-        'column' => [
-            // 栏目管理
-            'class' => 'backend\modules\column\Module',
-        ],
         'user' => [
             // 用户管理
             'class' => 'backend\modules\user\Module',
