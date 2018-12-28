@@ -134,18 +134,25 @@ $js .= <<<EOF
                 
             }
             ,before: function(obj){
-            
-              //预读本地文件示例，不支持ie8
-//              obj.preview(function(index, file, result){
-//                $('#{$clientOptions["divId"]}').append("<li>" +
-//                "<img src='" + result + "'  alt='"+ file.name +"'>"
-//                "</li>")
-//              });
-        
+                let n2 = Object.keys(this.files).length; //已选择的文件数，未上传
+                if(n2){
+                    layer.msg('图片上传中...', {
+                        icon: 16,
+                        shade: 0.01,
+                        time: 0
+                    })
+                }else{
+                    layer.msg("请先选择图片");
+                }
             }
-            ,done: function(res){
+            ,done: function(res, index, upload){
                 //上传完毕
                 layer.close(layer.msg());//关闭上传提示窗口
+                
+                let demoListView = $("#{$clientOptions["divId"]} .layui-upload-list");
+                var tr = demoListView.find('div#upload-'+ index);
+                tr.remove();
+                delete this.files[index]; //删除文件队列已经上传成功的文件
                 
                 var options = {$clientOptions["divId"]}_options;
                 options.files = res.files;
