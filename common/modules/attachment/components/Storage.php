@@ -25,7 +25,7 @@ class Storage extends Component
     }
 
     /**
-     * 根据物理路径获取网页路径
+     * 根据存储路径 + 配置项的 存储文件夹获取网页URL路径
      * @param $path
      * @return string
      */
@@ -47,4 +47,42 @@ class Storage extends Component
         return $url;
     }
 
+
+    /**
+     * 根据存储路径 + 配置项的 存储文件夹获取实际物理路径
+     * @param $path
+     * @return string
+     */
+    public function getPath($path){
+        $fileurl = \Yii::$app->config->get("fileurl");  //上传路径
+        $fileurl = ltrim($fileurl, '/'); //去掉左边的斜杠
+        $path = ltrim($path, '/');  //去掉左边的斜杠
+        return $path = \Yii::getAlias("@root") . "/web/" . $fileurl . $path; // 实际物理路径
+    }
+
+
+    /**
+     * 根据存储路径 + 配置项的 存储文件夹 查询该文件是否存在磁盘上
+     * @param $path
+     * @return bool
+     */
+    public function has($path)
+    {
+        $path = $this->getPath($path); // 实际物理路径
+        //文件是否存在
+        if(file_exists($path)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * 根据存储路径 + 配置项的 存储文件夹获取物理路径，再删除文件，调用该方法之前需要先调用has方法，查询该文件是否存在
+     * @param $path
+     */
+    public function delete($path){
+        $path = $this->getPath($path); // 实际物理路径
+        @unlink($path);
+    }
 }

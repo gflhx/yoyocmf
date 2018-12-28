@@ -78,7 +78,6 @@ class Attachment extends \yii\db\ActiveRecord
         ];
     }
 
-
     public function afterDelete()
     {
         parent::afterDelete();
