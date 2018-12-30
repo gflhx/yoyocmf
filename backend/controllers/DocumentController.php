@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\DocumentData;
 use Yii;
 use common\models\Document;
 use backend\models\searchs\DocumentSearch;
@@ -68,12 +69,15 @@ class DocumentController extends Controller
 //        $model->ismember = 1;   // 1为前台会员发布，0为后台发布
         $model->isurl = 0;        // 是否外部链接 (1为外部链接，0为普通信息)
 
+        $module = new DocumentData();
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
         }
 
         return $this->render('create', [
             'model' => $model,
+            'module' => $module
         ]);
     }
 

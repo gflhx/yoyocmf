@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "992091b41dfba0ad2475cfd1c32d44e5",
+    "content-hash": "4d242e999c09f15a7dd5ece1600843af",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -1038,6 +1038,53 @@
                 "environment"
             ],
             "time": "2018-10-30T17:29:25+00:00"
+        },
+        {
+            "name": "yiichina/yii2-md-editor",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiichina/yii2-md-editor.git",
+                "reference": "29fdd329158219c716a758c8e848955c635220eb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiichina/yii2-md-editor/zipball/29fdd329158219c716a758c8e848955c635220eb",
+                "reference": "29fdd329158219c716a758c8e848955c635220eb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "*",
+                "yiisoft/yii2-bootstrap": "*",
+                "yiisoft/yii2-swiftmailer": "*"
+            },
+            "require-dev": {
+                "yiisoft/yii2-codeception": "*",
+                "yiisoft/yii2-debug": "*",
+                "yiisoft/yii2-faker": "*",
+                "yiisoft/yii2-gii": "*"
+            },
+            "type": "project",
+            "extra": {
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Yii 2 Advanced Application Template",
+            "homepage": "http://www.yiiframework.com/",
+            "keywords": [
+                "advanced",
+                "application template",
+                "framework",
+                "yii2"
+            ],
+            "time": "2017-07-15T07:37:50+00:00"
         },
         {
             "name": "yiisoft/yii2",

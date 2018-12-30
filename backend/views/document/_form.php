@@ -69,6 +69,8 @@ use common\widgets\uploader\UploadWidget;
 
                     <?= $form->field($model, 'istop')->dropDownList($model->getNine()) ?>
 
+
+
                 </div>
 
                 <div class="layui-tab-item">
