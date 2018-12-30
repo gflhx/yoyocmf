@@ -58,7 +58,7 @@ $js .= <<<EOF
             ,accept:accept
             ,data: {
               water: function(){
-                return $("input#water").is(':checked');
+                return $("#{$clientOptions["divId"]} #water").is(':checked');
               }
             }
             ,before: function(obj){

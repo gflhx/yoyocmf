@@ -66,7 +66,7 @@ $js .= <<<EOF
             ,bindAction: '#{$clientOptions["divId"]} .testListAction'
             ,data: {
               water: function(){
-                return $("input#water").is(':checked');
+                return $("#{$clientOptions["divId"]} #water").is(':checked');
               }
             }
             ,choose: function(obj){
