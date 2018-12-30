@@ -21,11 +21,11 @@ class EditorWidget extends InputWidget
 
     public $isMarkdown;
 
-    public $typeEnum = ['redactor', 'markdown', 'ueditor'];
+    public $typeEnum = ['redactor', 'ueditor'];
 
     protected $defaultRichType = 'ueditor';
 
-    protected $defaultMarkdownType = 'markdown';
+    protected $defaultMarkdownType = 'redactor';
     /**
      * @var string 编辑器类型
      */
@@ -46,7 +46,7 @@ class EditorWidget extends InputWidget
                 $this->type = $this->defaultRichType;
             }
         }
-        if(!in_array($this->type, $this->typeEnum)) {
+        if (!in_array($this->type, $this->typeEnum)) {
             throw new InvalidParamException('编辑器类型不存在');
         }
         $this->options = array_merge($this->inputOptions, $this->options);
@@ -57,31 +57,6 @@ class EditorWidget extends InputWidget
         return call_user_func([$this, $this->type]);
     }
 
-
-    protected function markdown()
-    {
-        if ($this->hasModel()) {
-            return Editormd::widget([
-                'model' => $this->model,
-                'attribute' => $this->attribute,
-                'imageUploadRoute' => [
-                    '/upload/md-image-upload',
-                    'fileparam' => 'editormd-image-file'
-                ],
-                'options' => $this->options
-            ]);
-        } else {
-            return Editormd::widget([
-                'name' => $this->name,
-                'value' => $this->value,
-                'imageUploadRoute' => [
-                    '/attachment/upload/md-image-upload',
-                    'fileparam' => 'editormd-image-file'
-                ],
-                'options' => $this->options
-            ]);
-        }
-    }
     protected function redactor()
     {
         $defaultOptions = [
@@ -92,6 +67,7 @@ class EditorWidget extends InputWidget
             'fileManagerJson' => Url::to(['/upload/redactor-files-get']),
             'fileUpload' => Url::to(['/upload/redactor-file-upload']),
             'plugins' => [
+                'counter', //计数
                 'clips',
                 'fullscreen',
                 'imagemanager',

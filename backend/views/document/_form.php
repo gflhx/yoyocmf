@@ -69,7 +69,7 @@ use common\widgets\uploader\UploadWidget;
 
 
                     <?php echo $form->field($module, 'newstext',[
-                        'template' => '{label}<div class="col-sm-5">{input}</div><div class="col-sm-2">{error}</div>',
+                        'template' => '{label}<div class="col-sm-8">{input}</div><div class="col-sm-2">{error}</div>',
                     ])->widget(\common\widgets\EditorWidget::className(), ['type' => 'redactor']); ?>
                 </div>
 
