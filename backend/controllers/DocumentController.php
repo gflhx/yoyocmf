@@ -6,6 +6,7 @@ use common\models\DocumentData;
 use Yii;
 use common\models\Document;
 use backend\models\searchs\DocumentSearch;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -36,6 +37,7 @@ class DocumentController extends Controller
      */
     public function actionIndex()
     {
+        Url::remember();
         $searchModel = new DocumentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -69,15 +71,30 @@ class DocumentController extends Controller
 //        $model->ismember = 1;   // 1为前台会员发布，0为后台发布
         $model->isurl = 0;        // 是否外部链接 (1为外部链接，0为普通信息)
 
-        $module = new DocumentData();
+        $moduleModel = new DocumentData();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+
+            $moduleModel->load(Yii::$app->request->post());
+            $moduleModel->save();
+
+            if ($moduleModel->errors) {
+
+                return $this->render('create', [
+                    'model' => $model,
+                    'module' => $moduleModel
+                ]);
+
+            } else {
+                Yii::$app->session->setFlash('success', "创建成功");
+                return $this->goBack();
+            }
+
         }
 
         return $this->render('create', [
             'model' => $model,
-            'module' => $module
+            'module' => $moduleModel
         ]);
     }
 
@@ -91,13 +108,30 @@ class DocumentController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $moduleModel = $model->data;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+
+            $moduleModel->load(Yii::$app->request->post());
+            $moduleModel->save();
+
+            if ($moduleModel->errors) {
+
+                return $this->render('update', [
+                    'model' => $model,
+                    'module' => $moduleModel
+                ]);
+
+            } else {
+                Yii::$app->session->setFlash('success', "更新成功");
+                return $this->goBack();
+            }
+
         }
 
         return $this->render('update', [
             'model' => $model,
+            'module' => $moduleModel
         ]);
     }
 

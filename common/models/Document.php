@@ -145,4 +145,12 @@ class Document extends \yii\db\ActiveRecord
             return $array;
         }
     }
+
+    /**
+     * 获取内容
+     * @return \yii\db\ActiveQuery
+     */
+    public function getData(){
+        return $this->hasOne(DocumentData::className(),["id"=>"id"]);
+    }
 }

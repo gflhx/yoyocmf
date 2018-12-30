@@ -50,8 +50,6 @@ use common\widgets\uploader\UploadWidget;
 
                     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-                    <?php //echo $form->field($model, 'titlefont')->textInput(['maxlength' => true]) ?>
-
                     <?= $form->field($model, 'ftitle')->textInput(['maxlength' => true]) ?>
 
                     <?= $form->field($model, 'titlepic')->widget(UploadWidget::className(), [
@@ -70,7 +68,9 @@ use common\widgets\uploader\UploadWidget;
                     <?= $form->field($model, 'istop')->dropDownList($model->getNine()) ?>
 
 
-
+                    <?php echo $form->field($module, 'newstext',[
+                        'template' => '{label}<div class="col-sm-5">{input}</div><div class="col-sm-2">{error}</div>',
+                    ])->widget(\common\widgets\EditorWidget::className(), ['type' => 'redactor']); ?>
                 </div>
 
                 <div class="layui-tab-item">
@@ -84,7 +84,7 @@ use common\widgets\uploader\UploadWidget;
 
                     <?= $form->field($model, 'titleurl')->textInput()->label("外部链接") ?>
 
-                    <?= $form->field($model, 'files',[
+                    <?= $form->field($model, 'files', [
                         'template' => '{label}<div class="col-sm-10">{input}</div><div class="col-sm-12">{error}</div>',
                     ])->widget(UploadWidget::className(), [
                         'onlyImage' => false, // true允许上传图片类型,false允许上传所有类型,默认true
@@ -92,7 +92,7 @@ use common\widgets\uploader\UploadWidget;
                         'maxNumberOfFiles' => 4,    // 允许上传的最大文件数
                     ]) ?>
 
-                    <?= $form->field($model, 'morepic',[
+                    <?= $form->field($model, 'morepic', [
                         'template' => '{label}<div class="col-sm-10">{input}</div><div class="col-sm-12">{error}</div>',
                     ])->widget(UploadWidget::className(), [
                         'onlyImage' => true,  // true允许上传图片类型,false允许上传所有类型,默认true

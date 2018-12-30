@@ -58,7 +58,7 @@ class UploadAction extends Action
 
     public $itemCallback;
 
-    private $_water = false;
+    public $_water = false;
 
     /**
      * @inheritdoc

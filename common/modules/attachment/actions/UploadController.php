@@ -19,25 +19,27 @@ class UploadController extends Controller
     public function actions()
     {
         return [
-//            'redactor-files-get' => [
-//                'class' => GetAction::className(),
-//                'type' => 'files',
-//            ],
-//            'redactor-image-upload' => [
-//                'class' => UploadAction::className(),
-//                'path' => date('Ymd'),
-//                'callback' => function($result) {
-//                    return !isset($result['files'][0]['error']) ? [
-//                        'filelink' => $result['files'][0]['url']
-//                    ] : [
-//                        'error' => $result['files'][0]['error']
-//                    ];
-//                }
-//            ],
-//            'redactor-images-get' => [
-//                'class' => GetAction::className(),
-//                'type' => 'images',
-//            ],
+            'redactor-files-get' => [
+                'class' => GetAction::className(),
+                'type' => 'files',
+            ],
+            'redactor-image-upload' => [
+                // redactor编辑器默认是否有水印，手动配置
+                'class' => UploadAction::className(),
+                'path' => date('Ymd')."/",//在系统设置里面的图片上传目录后面再加一个按时间为文件夹
+//                '_water' => 'true', //是否需要水印，true or false，string型
+                'callback' => function($result) {
+                    return !isset($result['files'][0]['error']) ? [
+                        'filelink' => $result['files'][0]['url']
+                    ] : [
+                        'error' => $result['files'][0]['error']
+                    ];
+                }
+            ],
+            'redactor-images-get' => [
+                'class' => GetAction::className(),
+                'type' => 'images',
+            ],
 //            'redactor-file-upload' => [
 //                'class' => UploadAction::className(),
 //                'path' => date('Ymd'),
@@ -51,7 +53,6 @@ class UploadController extends Controller
 //                    ];
 //                }
 //            ],
-
 //            'avatar-upload' => [
 //                'class' => UploadAction::className(),
 //                'path' => 'avatar/' . Yii::$app->user->id,
