@@ -9,6 +9,7 @@
 
     <div class="layui-upload multiple-upload-list" id="<?= $clientOptions["divId"] ?>">
         <button type="button" class="layui-btn layui-btn-normal" id="test2">多图片上传</button>
+        <input type="checkbox" name="water" id="water" title="水印" lay-skin="primary" <?=$clientOptions["ifWater"]?"checked":""?>>
         <input type="hidden" name="<?= $clientOptions["name"] ?>" id="<?= $clientOptions["id"] ?>">
         <?php
         if ($clientOptions["showTips"]) {
@@ -63,6 +64,11 @@ $js .= <<<EOF
             ,auto: false //自动上传,取消自动上传false
             ,number:"{$clientOptions["maxNumberOfFiles"]}"
             ,bindAction: '#{$clientOptions["divId"]} .testListAction'
+            ,data: {
+              water: function(){
+                return $("input#water").is(':checked');
+              }
+            }
             ,choose: function(obj){
             
                 // 允许上传的张数

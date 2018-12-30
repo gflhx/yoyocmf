@@ -6,6 +6,7 @@ use common\modules\user\models\User;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\behaviors\TimestampBehavior;
+use yii\imagine\Image;
 use yii\web\UploadedFile;
 
 /**
@@ -97,14 +98,14 @@ class Attachment extends \yii\db\ActiveRecord
     }
 
     /**
-     * @param $path
-     * @param $file UploadedFile
-     * @return Attachment|null|static
+     * @param bool $ifWater          *是否需要水印，默认否
+     * @param $path             *存储文件地址,根目录的web目录下,【不包含根据配置项中附件地址】之后的目录
+     * @param $file             *文件流
+     * @return Attachment|null
      * @throws \Exception
      */
-    public static function uploadFromPost($path, $file)
+    public static function uploadFromPost($ifWater,$path, $file)
     {
-//        print_r($file);
         $hash = md5_file($file->tempName);
         $attachment = static::findByHash($hash);
         if (empty($attachment)) {
@@ -117,7 +118,28 @@ class Attachment extends \yii\db\ActiveRecord
             $setFileUrl = Yii::$app->config->get("fileurl");
             $storagePath = Yii::getAlias("@root")."/web" .$setFileUrl . $path;
             self::DoMkdir($storagePath);
-            $uploadRes = $file->saveAs($storagePath . $filename);
+
+            $uploadRes = $file->saveAs($storagePath . $filename);//上传地址 + 文件名
+
+            //图片水印
+            if($ifWater){
+                $fullThumbFilename = $hash. '_w.' . $extension;
+                $waterImg = Yii::$app->config->get("watermark");
+                if(!$waterImg){
+                    throw new \Exception('缺少水印图片');
+                }
+                $waterImg = Yii::$app->storage->getPathByLocalUrl($waterImg);
+
+                $fullThumbPath = $storagePath . $fullThumbFilename;  //缩略图地址，压缩质量为80
+                $x = Yii::$app->config->get("watermark_x");
+                $y = Yii::$app->config->get("watermark_y");
+
+                $uploadRes = Image::watermark($storagePath. $filename, $waterImg, [$x,$y])->save(Yii::getAlias($fullThumbPath), ['quality' => 80]);
+
+                // 重新定义文件名，水印文件名
+                $filename = $fullThumbFilename;
+            }
+
 
             if ($uploadRes) {
                 $attachment = new static();

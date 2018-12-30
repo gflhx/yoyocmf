@@ -50,7 +50,7 @@ class Storage extends Component
 
     /**
      * 根据存储路径 + 配置项的 存储文件夹获取实际物理路径
-     * @param $path
+     * @param $path  * 这里的path是指存在att表中path路径
      * @return string
      */
     public function getPath($path){
@@ -60,6 +60,12 @@ class Storage extends Component
         return $path = \Yii::getAlias("@root") . "/web/" . $fileurl . $path; // 实际物理路径
     }
 
+
+    public function getPathByLocalUrl($url){
+        $newsUrl = \Yii::$app->config->get("newsurl");  //网站url\
+        $path = str_replace($newsUrl,"",$url);
+        return \Yii::getAlias("@root") . "/web/" .$path;
+    }
 
     /**
      * 根据存储路径 + 配置项的 存储文件夹 查询该文件是否存在磁盘上

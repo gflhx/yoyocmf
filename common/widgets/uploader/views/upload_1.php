@@ -10,6 +10,9 @@
 ?>
     <div class="layui-upload" id="<?= $clientOptions["divId"] ?>">
         <button type="button" class="layui-btn" id="test1">上传图片</button>
+
+        <input type="checkbox" name="water" id="water" title="水印" lay-skin="primary" <?=$clientOptions["ifWater"]?"checked":""?>>
+
         <input type="hidden" name="<?=$clientOptions["name"]?>" id="<?=$clientOptions["id"]?>">
         <!--预览-->
         <p id="demoText"></p>
@@ -53,6 +56,11 @@ $js .= <<<EOF
             elem: '#{$clientOptions["divId"]} #test1'
             ,url: "{$clientOptions["url"]}"
             ,accept:accept
+            ,data: {
+              water: function(){
+                return $("input#water").is(':checked');
+              }
+            }
             ,before: function(obj){
                 layer.msg('图片上传中...', {
                         icon: 16,
@@ -73,7 +81,6 @@ $js .= <<<EOF
                 var options = {$clientOptions["divId"]}_options;
                 options.files = files;
                 
-                console.log(options);
                 $("#{$clientOptions["divId"]} .upload-kit-item ul").html("");
                 AttachmentUploadItems(options);
             }

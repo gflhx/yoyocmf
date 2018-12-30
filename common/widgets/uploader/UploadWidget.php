@@ -153,6 +153,7 @@ class UploadWidget extends InputWidget
             $imgHight = $this->options['img-height'];    // 预览图的高度
         }
 
+        $ifWater = \Yii::$app->config->get("ifwater"); //是否需要水印
         $this->clientOptions = ArrayHelper::merge($this->clientOptions, [
             'divId' => $this->_divId,
             'id' => $this->options['id'],
@@ -170,6 +171,7 @@ class UploadWidget extends InputWidget
             'showTips' => $this->showTips,   // 是否显示提示文字，默认true
             'imgWidth' => $imgWidth,         // 预览图的宽度
             'imgHight' => $imgHight,         // 预览图的高度
+            'ifWater' => $ifWater
         ]);
 
         // 注册资源

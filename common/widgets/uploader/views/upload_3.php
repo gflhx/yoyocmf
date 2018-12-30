@@ -10,6 +10,7 @@
     <div class="layui-upload" id="<?= $clientOptions["divId"] ?>">
         <input type="hidden" name="<?= $clientOptions["name"] ?>[]">
         <button type="button" class="layui-btn layui-btn-normal testList">选择多文件</button>
+
         <?php
         if ($clientOptions["showTips"]) {
 

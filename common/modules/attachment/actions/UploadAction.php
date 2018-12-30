@@ -58,6 +58,8 @@ class UploadAction extends Action
 
     public $itemCallback;
 
+    private $_water = false;
+
     /**
      * @inheritdoc
      */
@@ -68,6 +70,12 @@ class UploadAction extends Action
         }
         if ($this->uploadOnlyImage !== true) {
             $this->_validator = 'file';
+        }
+
+        $ifWater = Yii::$app->request->post("water",false);
+
+        if($ifWater === "true"){
+            $this->_water = true;
         }
     }
 
@@ -108,7 +116,7 @@ class UploadAction extends Action
     }
     private function uploadOne(UploadedFile $file)
     {
-//        p($this->_validator);
+//        p($this->path);
         try {
             $model = new DynamicModel(compact('file'));
             $model->addRule('file', $this->_validator, $this->validatorOptions)->validate();
@@ -116,7 +124,8 @@ class UploadAction extends Action
             if ($model->hasErrors()) {
                 throw new Exception($model->getFirstError('file'));
             } else {
-                $attachment = Attachment::uploadFromPost($this->path, $file);
+
+                $attachment = Attachment::uploadFromPost($this->_water , $this->path, $file);
                 $result = ArrayHelper::toArray($attachment);
                 $result["url"] = $attachment->url;
             }
