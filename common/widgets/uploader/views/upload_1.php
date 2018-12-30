@@ -54,14 +54,18 @@ $js .= <<<EOF
             ,url: "{$clientOptions["url"]}"
             ,accept:accept
             ,before: function(obj){
-                layer.load(1);
+                layer.msg('图片上传中...', {
+                        icon: 16,
+                        shade: 0.01,
+                        time: 0
+                    })
             }
             ,done: function(res){
-                layer.closeAll('loading'); //关闭加载层
+                layer.close(layer.msg());//关闭上传提示窗口
             
                 //如果上传失败
                 if(res.errcode != 0){
-                    return layer.msg('上传失败');
+                    return layer.msg(res.errmsg);
                 }
                 //上传成功
                 layer.msg('上传成功');
@@ -74,7 +78,7 @@ $js .= <<<EOF
                 AttachmentUploadItems(options);
             }
             ,error: function(){
-                layer.closeAll('loading'); //关闭loading
+                layer.close(layer.msg());//关闭上传提示窗口
             
                 //演示失败状态，并实现重传
                 var demoText = $('#demoText');
@@ -84,25 +88,6 @@ $js .= <<<EOF
                 });
             }
         });
-
-        
-        
-        <!--//多图片上传-->
-        <!--upload.render({-->
-            <!--elem: '#test2'-->
-            <!--,url: '/upload/'-->
-            <!--,multiple: true-->
-            <!--,before: function(obj){-->
-                <!--//预读本地文件示例，不支持ie8-->
-                <!--obj.preview(function(index, file, result){-->
-                    <!--$('#demo2').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')-->
-                <!--});-->
-            <!--}-->
-            <!--,done: function(res){-->
-                <!--//上传完毕-->
-            <!--}-->
-        <!--});-->
-
 
     });
 

@@ -149,11 +149,11 @@ layui.use('upload', function(){
             
                 let n2 = Object.keys(this.files).length; //已选择的文件数，未上传
                 if(n2){
-                    layer.msg('图片上传中...', {
-                        icon: 16,
-                        shade: 0.01,
-                        time: 0
-                    })
+                    <!--layer.msg('图片上传中...', {-->
+                        <!--icon: 16,-->
+                        <!--shade: 0.01,-->
+                        <!--time: 0-->
+                    <!--})-->
                 }else{
                     layer.msg("请先选择图片");
                 }
@@ -162,7 +162,7 @@ layui.use('upload', function(){
             }
             ,done: function(res, index, upload){
                 //上传成功
-                layer.close(layer.msg());//关闭上传提示窗口
+                <!--layer.close(layer.msg());//关闭上传提示窗口-->
                 
                 var tr = demoListView.find('tr#upload-'+ index)
                         ,tds = tr.children();
