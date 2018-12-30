@@ -9,8 +9,7 @@
 
 1、根目录解析到web目录.
 
-2、composer install安装
-   也可以从云盘[下载vendor.vip](https://pan.baidu.com/s/18T8Y5auduqSyjm1-suRn9A) 密码：rq6l
+2、composer install
 
 3、根目录下运行：php init  / 输 0  / yes / No
 
