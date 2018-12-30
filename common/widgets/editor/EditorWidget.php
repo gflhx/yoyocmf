@@ -67,14 +67,19 @@ class EditorWidget extends InputWidget
             'fileManagerJson' => Url::to(['/upload/redactor-files-get']),
             'fileUpload' => Url::to(['/upload/redactor-file-upload']),
             'plugins' => [
-                'counter', //计数
+                'counter', //计数，未生效
                 'clips',
                 'fullscreen',
                 'imagemanager',
-                'filemanager'
+                'filemanager',
+                'fontcolor',
+//                'fontfamily', //字体没什么用，针对英文
+                'fontsize',
             ]
         ];
         $options = array_merge($defaultOptions, $this->options);
+
+//        p($options);
         if ($this->hasModel()) {
             return Widget::widget([
                 'model' => $this->model,

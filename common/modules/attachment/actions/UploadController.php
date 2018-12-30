@@ -40,19 +40,19 @@ class UploadController extends Controller
                 'class' => GetAction::className(),
                 'type' => 'images',
             ],
-//            'redactor-file-upload' => [
-//                'class' => UploadAction::className(),
-//                'path' => date('Ymd'),
-//                'uploadOnlyImage' => false,
-//                'callback' => function($result) {
-//                    return !isset($result['files'][0]['error']) ? [
-//                        'filelink' => $result['files'][0]['url'],
-//                        'filename' => $result['files'][0]['filename']
-//                    ] : [
-//                        'error' => $result['files'][0]['error']
-//                    ];
-//                }
-//            ],
+            'redactor-file-upload' => [
+                'class' => UploadAction::className(),
+                'path' => date('Ymd')."/",
+                'uploadOnlyImage' => false,
+                'callback' => function($result) {
+                    return !isset($result['files'][0]['error']) ? [
+                        'filelink' => $result['files'][0]['url'],
+                        'filename' => $result['files'][0]['filename']
+                    ] : [
+                        'error' => $result['files'][0]['error']
+                    ];
+                }
+            ],
 //            'avatar-upload' => [
 //                'class' => UploadAction::className(),
 //                'path' => 'avatar/' . Yii::$app->user->id,
