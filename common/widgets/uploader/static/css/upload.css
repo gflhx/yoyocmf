@@ -60,6 +60,9 @@
     word-wrap: break-word;
     word-break:break-all;
 }
+.layui-upload.multiple-upload-list .layui-upload-list div.col-md-3 p.title.block{
+    display: block;
+}
 .layui-upload.multiple-upload-list .layui-upload-list div.col-md-3:hover p.title{
     /*color: ;*/
     display: block;

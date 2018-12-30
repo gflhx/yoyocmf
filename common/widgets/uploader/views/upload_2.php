@@ -113,7 +113,7 @@ $js .= <<<EOF
                         , "<div class='img-wrapper img-rounded'>"
                         , "<img src='" + result + "' class='img-responsive center-block'>"
                         , "<span class='glyphicon glyphicon-trash removeItem' aria-hidden='true'></span>"
-                        , "<p class='title'> 待上传"+file.name+(file.size/1014).toFixed(1)+"kb</p>"
+                        , "<p class='title block'> 待上传"+file.name+(file.size/1014).toFixed(1)+"kb</p>"
                         , "</div>"
                         , '</div>'].join(''));
                     
