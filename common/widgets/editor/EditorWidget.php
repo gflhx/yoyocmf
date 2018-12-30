@@ -75,6 +75,11 @@ class EditorWidget extends InputWidget
                 'fontcolor',
 //                'fontfamily', //字体没什么用，针对英文
                 'fontsize',
+                'table',
+//                'textdirection',//没效果
+//                'variable',   //没效果
+                'video',
+//                'widget'      //没效果
             ]
         ];
         $options = array_merge($defaultOptions, $this->options);

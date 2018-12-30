@@ -20,11 +20,11 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-xs-8 text-right">
             <?= Html::a('更新', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
             <?= Html::a('删除', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-            'confirm' => '是否确定删除??',
-            'method' => 'post',
-            ],
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => '是否确定删除??',
+                    'method' => 'post',
+                ],
             ]) ?>
             <a class="btn btn-success" href="javascript:history.go(-1)" role="button">返回</a>
         </div>
@@ -34,17 +34,42 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="yoyo-box mt20 document-view">
 
     <?= DetailView::widget([
-    'model' => $model,
-    'attributes' => [
-                'id',
+        'model' => $model,
+        'attributes' => [
+//            'id',
+            [
+                'attribute' => 'titlepic',
+                'value' => function ($model) {
+                    if ($model->titlepic) {
+                        return Html::img($model->titlepic,
+                            ['class' => 'thumbnail',
+                                'width' => 200]
+                        );
+                    } else {
+                        return "";
+                    }
+                },
+                'format' => 'raw'
+            ],
             'smalltext',
+            [
+                'label' => '详情',
+                'value' => function ($model) {
+                    if ($model->data->newstext) {
+                        return $model->data->newstext;
+                    } else {
+                        return "";
+                    }
+                },
+                'format' => 'raw'
+            ],
             'classid',
             'ttid',
             'onclick',
             'plnum',
             'totaldown',
             'newspath',
-            'filename',
+//            'filename',
             'user_id',
             'username',
             'firsttitle',
@@ -56,16 +81,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'havehtml',
             'groupid',
             'userfen',
-            'titlefont',
-            'titleurl',
-            'created_at',
-            'updated_at',
+//            'titlefont',
             'ftitle',
             'diggtop',
             'stb',
             'title',
             'titlepic',
-    ],
+            'titleurl',
+            'created_at',
+            'updated_at',
+
+        ],
     ]) ?>
 
 </div>
